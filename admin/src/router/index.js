@@ -9,8 +9,20 @@ import Staff from "@/views/Staff.vue";
 import StaffAdd from "@/views/StaffAdd.vue";
 import StaffEdit from "@/views/StaffEdit.vue";
 import Borrow from "@/views/Borrow.vue";
+import Login from "@/views/Login.vue";
+import Register from "@/views/Register.vue";
 
 const routes = [
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
+  },
   {
     path: "/",
     name: "Book",

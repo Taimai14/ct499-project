@@ -1,41 +1,29 @@
 import createApiClient from "./api";
-import { defineStore } from "pinia";
 
-export const userStore = defineStore("userStore", {
-  state: () => {
-    return {
-      token: "",
-      userInfor: {},
-    };
-  },
-  actions: {
-    RegisterStaff: async function (data) {
-      return await createApiClient
-        .post("auth/staffregister", data)
-        .then((res) => {
-          return res.data.message;
-        })
-        .catch((err) => {
-          console.log(err);
-          return false;
-        });
-    },
-    LoginStaff: async function (data) {
-      return await createApiClient
-        .post("auth/stafflogin", data)
-        .then((res) => {
-          this.token = res.data.data?.token;
-          this.userInfor = res.data.data?.user;
-          return res.data.message;
-        })
-        .catch((err) => {
-          console.log(err);
-          return false;
-        });
-    },
-    Logout: function () {
-      this.token = "";
-      this.userInfor = {};
-    },
-  },
-});
+class AuthService {
+  constructor(baseUrl = "/api/auth") {
+    this.api = createApiClient(baseUrl);
+  }
+
+  async register(data) {
+    try {
+      const response = await this.api.post("/staffregister", data);
+      return response.data;
+    } catch (error) {
+      console.error("Error registering user:", error);
+      throw error;
+    }
+  }
+
+  async login(data) {
+    try {
+      const response = await this.api.post("/stafflogin", data);
+      return response.data;
+    } catch (error) {
+      console.error("Error logging in user:", error);
+      throw error;
+    }
+  }
+}
+
+export default new AuthService();

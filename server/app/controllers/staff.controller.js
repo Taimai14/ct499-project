@@ -15,7 +15,7 @@ exports.register = async (req, res, next) => {
 
     const staffService = new StaffService(MongoDB.client);
     const document = await staffService.register(staff);
-    return res.send({ message: "Register Successfully" }, document);
+    return res.send(201, { message: "Register Successfully" }, document);
   } catch (Error) {
     return next(new ApiError(500, Error));
   }
@@ -32,8 +32,8 @@ exports.login = async (req, res, next) => {
     const token = jwt.sign({ id: result._id }, "taimai", {
       expiresIn: "1h",
     });
-
-    return res.send({ result, token });
+    const data = { ...result, token };
+    return res.status(200).send(data);
   } catch (error) {
     console.error(error);
 
@@ -53,7 +53,7 @@ exports.create = async (req, res, next) => {
     const staffService = new StaffService(MongoDB.client);
 
     const document = await staffService.create(req.body);
-    return res.send(document);
+    return res.status(200).send(document);
   } catch (error) {
     return next(
       new ApiError(500, "An error occurred while creating the staff")

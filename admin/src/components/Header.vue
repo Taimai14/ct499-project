@@ -26,6 +26,34 @@
                     <i class="fa-regular fa-calendar-check"></i>                
                 </router-link>
             </li>
+            <li class="nav-item">
+                <button @click="handleLogout" class="nav-link">
+                Logout
+                <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </li>
         </div>
     </nav>
 </template>
+<script>
+import axios from 'axios'; 
+
+export default {
+  name: 'Header', 
+  methods: {
+    async handleLogout() {
+      try {
+        localStorage.removeItem('token'); 
+
+        this.$router.push({ name: 'Login' });
+      } catch (error) {
+        console.error('Logout error:', error);
+        alert('An error occurred during logout. Please try again.');
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+</style>
