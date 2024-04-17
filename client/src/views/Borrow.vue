@@ -1,6 +1,6 @@
 <template>
   <div class="Borrow-form">
-    <h3>Register User</h3>
+    <h3>Borrow Book</h3>
     <form @submit="handleSubmit">
       <div class="form-group">
         <label class="form-label" for="name">Name:</label>
