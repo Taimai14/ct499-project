@@ -1,7 +1,7 @@
 <template>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/" class="navbar-brand">ADMIN</a>
-        <div class="mr-auto navbar-nav">
+    <nav class="navbar navbar-expand navbar-dark bg-dark d-flex">
+        <a href="/" class="navbar-brand ">ADMIN</a>
+        <ul class="mr-auto navbar-nav d-flex">
             <li class="nav-item">
                 <router-link :to="{ name: 'Book' }" class="nav-link">
                     BOOK
@@ -26,13 +26,19 @@
                     <i class="fa-regular fa-calendar-check"></i>                
                 </router-link>
             </li>
-            <li class="nav-item">
+             <li class="nav-item">
+                <router-link :to="{ name: 'User' }" class="nav-link">
+                    User
+                    <i class="fa-regular fa-user"></i>                
+                </router-link>
+            </li>
+            <li class="nav-item logout">
                 <button @click="handleLogout" class="nav-link">
                 Logout
                 <i class="fas fa-sign-out-alt"></i>
                 </button>
             </li>
-        </div>
+        </ul>
     </nav>
 </template>
 <script>
@@ -56,4 +62,7 @@ export default {
 </script>
 
 <style scoped>
+.navbar{
+    justify-content: space-between;
+}
 </style>
